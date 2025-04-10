@@ -5,6 +5,7 @@ import { usersApi } from '@api/usersApi';
 import { useAppDispatch } from '@store/hooks';
 import { addUser } from '@store/employeesSlice';
 import { toast } from '@utils/toast';
+import { Button } from '@components/index';
 
 interface Props {
   isOpen: boolean;
@@ -46,40 +47,45 @@ export const CreateUserModal = ({ isOpen, onClose }: Props) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <h2>Create New User</h2>
-
-        <div className={styles.field}>
-          <label>Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="John Smith"
-          />
-          {!isValidName && name && (
-            <p className={styles.error}>Only English letters allowed</p>
-          )}
+        <div className={styles.header}>
+          <h2 className={styles.title}>Create New User</h2>
         </div>
+        <div className={styles.content}>
+          <div className={styles.field}>
+            <label>Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Smith"
+            />
+            {!isValidName && name && (
+              <p className={styles.error}>Only English letters allowed</p>
+            )}
+          </div>
 
-        <div className={styles.field}>
-          <label>Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value as UserStatus)}
-          >
-            {statuses.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className={styles.field}>
+            <label>Status:</label>
+            <select
+              value={status}
+              onChange={(e) => setStatus(e.target.value as UserStatus)}
+            >
+              {statuses.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className={styles.actions}>
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={handleCreate} disabled={!isValidName}>
-            Create
-          </button>
+          <div className={styles.actions}>
+            <Button onClick={handleCreate} disabled={!isValidName}>
+              Create
+            </Button>
+            <Button onClick={onClose} variant="ghost">
+              Cancel
+            </Button>
+          </div>
         </div>
       </div>
     </div>

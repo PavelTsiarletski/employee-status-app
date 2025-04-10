@@ -1,54 +1,78 @@
-# React + TypeScript + Vite
+# 🧩 Employee Status Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack application to manage employee statuses such as `Working`, `On Vacation`, `Lunch Time`, and `Business Trip`.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Project Structure
 
-## Expanding the ESLint configuration
+This project is organized as a monorepo using [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/), with two main packages:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+.
+├── client/   # React + Vite frontend
+├── server/   # Express backend
+└── package.json (root with workspaces)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 1. Install dependencies
+
+From the root directory:
+
+```bash
+yarn install
 ```
+
+This will install dependencies for both `client` and `server` workspaces.
+
+---
+
+### 2. Start the app
+
+To start both frontend and backend in development mode:
+
+```bash
+yarn dev
+```
+
+This runs:
+
+- `client` at [http://localhost:5173](http://localhost:5173)
+- `server` at [http://localhost:8000](http://localhost:8000)
+
+> Powered by [`concurrently`](https://www.npmjs.com/package/concurrently)
+
+---
+
+## 🛠 Tech Stack
+
+- **Client**: React + TypeScript + Vite
+- **Server**: Node.js + Express
+- **Package Manager**: Yarn Workspaces
+- **Styling**: CSS Modules
+
+---
+
+## 📂 Workspaces
+
+| Workspace | Path     | Description            |
+|-----------|----------|------------------------|
+| client    | `client/`| React application UI   |
+| server    | `server/`| Express REST API       |
+
+---
+
+## 📌 Features
+
+- View and filter employees by status
+- Search employees by name
+- Change status of an employee
+- Modal for creating new users (UI only)
+- Fully responsive and clean UI
+- Optimized rendering and minimal re-renders
+
+---

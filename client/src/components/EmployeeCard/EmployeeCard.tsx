@@ -1,3 +1,4 @@
+import React from 'react';
 import { usersApi } from '@api/usersApi';
 import styles from './EmployeeCard.module.css';
 import { User, UserStatus, updateStatus } from '@store/employeesSlice';
@@ -15,7 +16,14 @@ const statusOptions: UserStatus[] = [
   'BusinessTrip',
 ];
 
-export const EmployeeCard = ({ user }: Props) => {
+const statusToClassMap: Record<UserStatus, string> = {
+  Working: styles.statusWorking,
+  OnVacation: styles.statusVacation,
+  LunchTime: styles.statusLunchTime,
+  BusinessTrip: styles.statusBusinessTrip,
+};
+
+export const EmployeeCard = React.memo(({ user }: Props) => {
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -26,19 +34,6 @@ export const EmployeeCard = ({ user }: Props) => {
     });
   };
 
-  const getStatusDotClass = (status: UserStatus) => {
-    switch (status) {
-      case 'Working':
-        return styles.statusWorking;
-      case 'OnVacation':
-        return styles.statusVacation;
-      case 'LunchTime':
-        return styles.statusLunchTime;
-      case 'BusinessTrip':
-        return styles.statusBusinessTrip;
-    }
-  };
-
   return (
     <div className={styles.card}>
       <img className={styles.avatar} src={user.img} alt={user.name} />
@@ -46,7 +41,7 @@ export const EmployeeCard = ({ user }: Props) => {
         <div className={styles.name}>{user.name}</div>
         <div className={styles.statusRow}>
           <span
-            className={clsx(styles.statusDot, getStatusDotClass(user.status))}
+            className={clsx(styles.statusDot, statusToClassMap[user.status])}
           />
           <span className={styles.statusLabel}>{user.status}</span>
           <select
@@ -65,4 +60,13 @@ export const EmployeeCard = ({ user }: Props) => {
       </div>
     </div>
   );
-};
+}, areEqual);
+
+function areEqual(prev: Props, next: Props) {
+  return (
+    prev.user.id === next.user.id &&
+    prev.user.name === next.user.name &&
+    prev.user.status === next.user.status &&
+    prev.user.img === next.user.img
+  );
+}

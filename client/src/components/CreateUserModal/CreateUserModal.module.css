@@ -8,30 +8,86 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .modal {
-  background: white;
-  padding: 24px;
+  background: #ffffff;
   border-radius: 12px;
-  width: 320px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  width: 420px;
+  box-shadow: 0px 12px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+}
+
+.title {
+  padding: 20px 28px;
+  margin: 0 !important;
+}
+
+.content {
+  padding: 32px 28px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1a1a1a;
 }
 
 .field {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
+.field label {
+  font-size: 10px;
+  color: #666;
+}
+
+.field input,
+.field select {
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #139cf1;
+}
+
 .error {
-  color: red;
+  color: #d32f2f;
   font-size: 12px;
+  margin-top: 6px;
 }
 
 .actions {
   display: flex;
-  justify-content: flex-end;
   gap: 12px;
 }

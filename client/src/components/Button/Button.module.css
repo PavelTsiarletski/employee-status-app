@@ -7,28 +7,28 @@
 }
 
 .primary {
-  background-color: #139CF1;
+  background-color: #139cf1;
   color: white;
 }
 
 .primary:hover {
-  background-color: #005fd1;
+  background-color: #0d76b8;
 }
 
 .outline {
   background: transparent;
-  border: 1px solid #139CF1;
-  color: #139CF1;
+  border: 1px solid #139cf1;
+  color: #139cf1;
 }
 
 .outline:hover {
-  background-color: #139CF1;
+  background-color: #139cf1;
   color: white;
 }
 
 .ghost {
   background: transparent;
-  color: #139CF1;
+  color: black;
   border: none;
 }
 

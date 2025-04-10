@@ -30,18 +30,23 @@
   justify-content: space-between;
   align-items: center;
   margin: 32px 0 24px;
+  gap: 16px;
 }
 
 .filters {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex: 1;
+  background-color: white;
+  margin: 0;
+  padding: 8px;
+  border-radius: 4px;
 }
 
 .searchInput {
   padding: 10px 36px 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border: none;
   font-size: 14px;
   width: 240px;
   background-color: white;
@@ -49,20 +54,25 @@
 
 .selectWrapper {
   position: relative;
-  width: 160px;
+  min-width: 160px;
 }
 
 .statusSelect {
   width: 100%;
-  padding: 10px 32px 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 10px 32px 10px 32px;
+  border: none;
+  border-radius: 0;
+  border-left: 1px solid #ccc;
   font-size: 14px;
   appearance: none;
   background-color: white;
   cursor: pointer;
 }
 
+.searchInput:focus,
+.statusSelect:focus {
+  outline: none;
+}
 .selectWrapper::after {
   content: '▾';
   position: absolute;
@@ -70,6 +80,6 @@
   top: 50%;
   transform: translateY(-50%);
   color: #666;
-  font-size: 14px;
+  font-size: 25px;
   pointer-events: none;
 }
