@@ -1,5 +1,5 @@
 export * from './Button/Button';
-export * from './CreateUserModal/CreateUserModal';
-export * from './EmployeeCard/EmployeeCard';
+export * from '../module/employees/components/CreateUserModal/CreateUserModal';
+export * from '../module/employees/components/EmployeeCard/EmployeeCard';
 export * from './Header/Header';
 export * from './Wrapper/Wrapper';

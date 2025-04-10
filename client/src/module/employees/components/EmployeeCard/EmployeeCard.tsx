@@ -1,8 +1,7 @@
 import React from 'react';
-import { usersApi } from '@api/usersApi';
+import { useUpdateStatusMutation } from '../../api/usersApi';
 import styles from './EmployeeCard.module.css';
-import { User, UserStatus, updateStatus } from '@store/employeesSlice';
-import { useAppDispatch } from '@store/hooks';
+import { User, UserStatus } from '@module/employees/store/employeesSlice';
 import clsx from 'clsx';
 
 interface Props {
@@ -24,12 +23,11 @@ const statusToClassMap: Record<UserStatus, string> = {
 };
 
 export const EmployeeCard = React.memo(({ user }: Props) => {
-  const dispatch = useAppDispatch();
+  const [updateStatus] = useUpdateStatusMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newStatus = e.target.value as UserStatus;
-    dispatch(updateStatus({ userId: user.id, status: newStatus }));
-    usersApi.updateStatus(user.id, newStatus).catch((err) => {
+    updateStatus({ userId: user.id, status: newStatus }).catch((err) => {
       console.error('Failed to update status:', err);
     });
   };

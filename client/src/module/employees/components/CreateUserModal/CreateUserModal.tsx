@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styles from './CreateUserModal.module.css';
-import { UserStatus } from '@store/employeesSlice';
-import { usersApi } from '@api/usersApi';
-import { useAppDispatch } from '@store/hooks';
-import { addUser } from '@store/employeesSlice';
+import { UserStatus } from '@module/employees/store/employeesSlice';
+import { useCreateUserMutation } from '@module/employees/api/usersApi';
 import { toast } from '@utils/toast';
 import { Button } from '@components/index';
 
@@ -22,23 +20,22 @@ const statuses: UserStatus[] = [
 export const CreateUserModal = ({ isOpen, onClose }: Props) => {
   const [name, setName] = useState('');
   const [status, setStatus] = useState<UserStatus>('Working');
+  const [createUser, { isLoading }] = useCreateUserMutation();
 
   const isValidName = /^[A-Za-z\s]+$/.test(name);
-
-  const dispatch = useAppDispatch();
 
   const handleCreate = async () => {
     if (!isValidName) return;
 
     try {
-      const created = await usersApi.createUser(name, status);
-      dispatch(addUser(created));
+      const created = await createUser({ name, status }).unwrap();
       toast.success(`User "${created.name}" created`);
       onClose();
       setName('');
       setStatus('Working');
     } catch (err) {
       console.error('Failed to create user:', err);
+      toast.error('Could not create user');
     }
   };
 
@@ -79,8 +76,8 @@ export const CreateUserModal = ({ isOpen, onClose }: Props) => {
           </div>
 
           <div className={styles.actions}>
-            <Button onClick={handleCreate} disabled={!isValidName}>
-              Create
+            <Button onClick={handleCreate} disabled={!isValidName || isLoading}>
+              {isLoading ? 'Creating...' : 'Create'}
             </Button>
             <Button onClick={onClose} variant="ghost">
               Cancel

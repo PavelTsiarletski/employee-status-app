@@ -1,13 +1,10 @@
-import { useEffect, useMemo, useCallback, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {
-  setUsers,
-  setStatusFilter,
-  setSearchQuery,
-} from '@store/employeesSlice';
-import { usersApi } from '@api/usersApi';
+import { useMemo, useCallback, useState } from 'react';
+
 import styles from './EmployeesPage.module.css';
 import { Button, CreateUserModal, EmployeeCard } from '@components/index';
+import { setStatusFilter, setSearchQuery } from '../store/employeesSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useGetUsersQuery } from '../api/usersApi';
 
 const statusOptions = [
   'All',
@@ -19,22 +16,13 @@ const statusOptions = [
 
 export const EmployeesPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoading, setLoading] = useState(true);
 
   const dispatch = useAppDispatch();
-  const { users, statusFilter, searchQuery } = useAppSelector(
+  const { statusFilter, searchQuery } = useAppSelector(
     (state) => state.employees
   );
 
-  useEffect(() => {
-    usersApi
-      .getAll()
-      .then((users) => dispatch(setUsers(users)))
-      .catch((err) => {
-        console.error('Failed to fetch users:', err);
-      })
-      .finally(() => setLoading(false));
-  }, [dispatch]);
+  const { data: users = [], isLoading } = useGetUsersQuery();
 
   const handleFilterChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,7 +51,7 @@ export const EmployeesPage = () => {
   }, [users, statusFilter, searchQuery]);
 
   if (isLoading) {
-    return <div>Loading... </div>;
+    return <div>Loading...</div>;
   }
 
   return (

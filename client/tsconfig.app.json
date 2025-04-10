@@ -28,11 +28,10 @@
     /* Paths */
     "paths": {
       "@components/*": ["src/components/*"],
-      "@pages/*": ["src/pages/*"],
       "@store/*": ["src/store/*"],
-      "@api/*": ["src/api/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@module/*": ["src/module/*"]
     }
   },
   "include": ["src"]

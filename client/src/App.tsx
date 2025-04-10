@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { EmployeesPage } from './pages';
+import { EmployeesPage } from './module/employees';
 import './index.css';
 import { Layout } from './layouts/Layout';
 
