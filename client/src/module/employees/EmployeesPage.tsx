@@ -2,9 +2,9 @@ import { useMemo, useCallback, useState } from 'react';
 
 import styles from './EmployeesPage.module.css';
 import { Button, CreateUserModal, EmployeeCard } from '@components/index';
-import { setStatusFilter, setSearchQuery } from '../store/employeesSlice';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { useGetUsersQuery } from '../api/usersApi';
+import { setStatusFilter, setSearchQuery } from './store/employeesSlice';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { useGetUsersQuery } from './api/usersApi';
 
 const statusOptions = [
   'All',
