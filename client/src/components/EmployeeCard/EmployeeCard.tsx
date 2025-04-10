@@ -2,6 +2,7 @@ import { usersApi } from '@api/usersApi';
 import styles from './EmployeeCard.module.css';
 import { User, UserStatus, updateStatus } from '@store/employeesSlice';
 import { useAppDispatch } from '@store/hooks';
+import clsx from 'clsx';
 
 interface Props {
   user: User;
@@ -25,21 +26,42 @@ export const EmployeeCard = ({ user }: Props) => {
     });
   };
 
+  const getStatusDotClass = (status: UserStatus) => {
+    switch (status) {
+      case 'Working':
+        return styles.statusWorking;
+      case 'OnVacation':
+        return styles.statusVacation;
+      case 'LunchTime':
+        return styles.statusLunchTime;
+      case 'BusinessTrip':
+        return styles.statusBusinessTrip;
+    }
+  };
+
   return (
     <div className={styles.card}>
-      <div className={styles.avatar} />
-      <div className={styles.info}>
-        <strong className={styles.name}>{user.name}</strong>
-        <label className={styles.status}>
-          Status:
-          <select value={user.status} onChange={handleChange}>
+      <img className={styles.avatar} src={user.img} alt={user.name} />
+      <div className={styles.content}>
+        <div className={styles.name}>{user.name}</div>
+        <div className={styles.statusRow}>
+          <span
+            className={clsx(styles.statusDot, getStatusDotClass(user.status))}
+          />
+          <span className={styles.statusLabel}>{user.status}</span>
+          <select
+            value={user.status}
+            onChange={handleChange}
+            className={styles.statusSelect}
+            title="Change status"
+          >
             {statusOptions.map((status) => (
               <option key={status} value={status}>
                 {status}
               </option>
             ))}
           </select>
-        </label>
+        </div>
       </div>
     </div>
   );

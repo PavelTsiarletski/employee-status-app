@@ -9,6 +9,8 @@ import {
 import { EmployeeCard } from '@components/EmployeeCard/EmployeeCard';
 import { usersApi } from '@api/usersApi';
 import { CreateUserModal } from '@components/CreateUserModal/CreateUserModal';
+import styles from './EmployeesPage.module.css';
+import { Button } from '@components/Button/Button';
 
 const mockUsers = [
   { id: '1', name: 'Johana Levi', status: 'Working' },
@@ -64,46 +66,45 @@ export const EmployeesPage = () => {
   });
 
   return (
-    <div>
-      <h1>Employees</h1>
+    <>
       <CreateUserModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
       />
+      <div className={styles.controls}>
+        <Button size="lg" onClick={() => setModalOpen(true)}>
+          Create +
+        </Button>
 
-      <div style={{ display: 'flex', gap: '16px', marginBottom: 16 }}>
-        <button onClick={() => setModalOpen(true)}>Create +</button>
-        <div>
-          <label htmlFor="search">Search by name: </label>
+        <div className={styles.filters}>
           <input
-            id="search"
             type="text"
+            className={styles.searchInput}
             value={searchQuery}
             onChange={handleSearchChange}
-            placeholder="Enter employee name"
+            placeholder="Type to search"
           />
-        </div>
-        <div>
-          <label htmlFor="status-filter">Filter by status: </label>
-          <select
-            id="status-filter"
-            value={statusFilter}
-            onChange={handleFilterChange}
-          >
-            {statusOptions.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
+          <div className={styles.selectWrapper}>
+            <select
+              className={styles.statusSelect}
+              value={statusFilter}
+              onChange={handleFilterChange}
+            >
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+      <div className={styles.grid}>
         {filteredUsers.map((user) => (
           <EmployeeCard key={user.id} user={user} />
         ))}
       </div>
-    </div>
+    </>
   );
 };

@@ -1,0 +1,47 @@
+.button {
+  font-weight: 500;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.primary {
+  background-color: #139CF1;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #005fd1;
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid #139CF1;
+  color: #139CF1;
+}
+
+.outline:hover {
+  background-color: #139CF1;
+  color: white;
+}
+
+.ghost {
+  background: transparent;
+  color: #139CF1;
+  border: none;
+}
+
+.ghost:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.lg {
+  padding: 15px 30px;
+  font-size: 20px;
+}
+
+.md {
+  padding: 10px 18px;
+  font-size: 14px;
+}

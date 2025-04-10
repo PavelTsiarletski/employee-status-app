@@ -1,33 +1,96 @@
 .card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  align-items: end;
+  gap: 16px;
+  padding: 30px;
+  border-radius: 4px;
   background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgb(163, 215, 255);
+  transform: translateY(-2px);
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background-color: #ddd;
-  margin-bottom: 12px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
-.info {
-  text-align: center;
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  gap: 8px;
 }
 
 .name {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  color: #2e2e2e;
 }
 
-.status {
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
-  color: #777;
+  color: #666;
+  position: relative;
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+}
+
+.statusRow::after {
+  content: '▾';
+  position: absolute;
+  right: 0;
+  color: #666;
+  font-size: 25px;
+  pointer-events: none;
+}
+
+.statusDot {
+  width: 4px;
+  height: 4px;
+  border: 3px solid;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusLabel {
+  text-transform: capitalize;
+}
+
+.statusSelect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.statusWorking {
+  border-color: #3dd598;
+}
+
+.statusVacation {
+  border-color: #f7685b;
+}
+
+.statusLunchTime {
+  border-color: #f6c343;
+}
+
+.statusBusinessTrip {
+  border-color: #a461d8;
 }

@@ -4,6 +4,7 @@ import { UserStatus } from '@store/employeesSlice';
 import { usersApi } from '@api/usersApi';
 import { useAppDispatch } from '@store/hooks';
 import { addUser } from '@store/employeesSlice';
+import { toast } from '@utils/toast';
 
 interface Props {
   isOpen: boolean;
@@ -31,6 +32,7 @@ export const CreateUserModal = ({ isOpen, onClose }: Props) => {
     try {
       const created = await usersApi.createUser(name, status);
       dispatch(addUser(created));
+      toast.success(`User "${created.name}" created`);
       onClose();
       setName('');
       setStatus('Working');

@@ -1,12 +1,14 @@
 import { ToastContainer } from 'react-toastify';
 import { EmployeesPage } from './pages';
+import './index.css';
+import { Layout } from './layouts/Layout';
 
 function App() {
   return (
-    <>
+    <Layout>
       <EmployeesPage />
       {import.meta.env.DEV && <ToastContainer />}
-    </>
+    </Layout>
   );
 }
 
