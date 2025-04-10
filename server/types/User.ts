@@ -8,4 +8,5 @@ export interface User {
   id: string;
   name: string;
   status: UserStatus;
+  img?: string;
 }

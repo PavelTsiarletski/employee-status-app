@@ -5,6 +5,9 @@ import { v4 as uuid } from 'uuid';
 import { User } from '../types/User';
 import { users } from '../data/usersDb';
 
+const DEFAULT_AVATAR =
+  'https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png';
+
 export const getUsersHandler = (req: Request, res: Response) => {
   res.json(getAllUsers());
 };
@@ -26,7 +29,7 @@ export const updateStatusHandler = (req: Request, res: Response) => {
 };
 
 export const createUserHandler = (req: Request, res: Response) => {
-  const { name, status } = req.body;
+  const { name, status, img } = req.body;
 
   if (!name || typeof name !== 'string' || !/^[A-Za-z\s]+$/.test(name)) {
     return res.status(400).json({ message: 'Invalid name' });
@@ -40,6 +43,7 @@ export const createUserHandler = (req: Request, res: Response) => {
     id: uuid(),
     name,
     status,
+    img: img?.trim() || DEFAULT_AVATAR,
   };
 
   users.push(newUser);
