@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, RequestHandler } from 'express';
 import { getAllUsers, updateUserStatus } from '../services/usersService';
 import { isValidStatus } from '../utils/validateStatus';
 import { v4 as uuid } from 'uuid';
@@ -12,31 +12,38 @@ export const getUsersHandler = (req: Request, res: Response) => {
   res.json(getAllUsers());
 };
 
-export const updateStatusHandler = (req: Request, res: Response) => {
+export const updateStatusHandler: RequestHandler = (req, res) => {
   const userId = req.params.userId;
   const { status } = req.body;
 
   if (!isValidStatus(status)) {
-    return res.status(400).json({ message: 'Invalid status' });
+    res.status(400).json({ message: 'Invalid status' });
+    return;
   }
 
   const updated = updateUserStatus(userId, status);
   if (!updated) {
-    return res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'User not found' });
+    return;
   }
 
   res.json(updated);
 };
 
-export const createUserHandler = (req: Request, res: Response) => {
+export const createUserHandler: RequestHandler = (
+  req: Request,
+  res: Response
+) => {
   const { name, status, img } = req.body;
 
   if (!name || typeof name !== 'string' || !/^[A-Za-z\s]+$/.test(name)) {
-    return res.status(400).json({ message: 'Invalid name' });
+    res.status(400).json({ message: 'Invalid name' });
+    return;
   }
 
   if (!isValidStatus(status)) {
-    return res.status(400).json({ message: 'Invalid status' });
+    res.status(400).json({ message: 'Invalid status' });
+    return;
   }
 
   const newUser: User = {
