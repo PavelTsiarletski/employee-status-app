@@ -30,7 +30,7 @@
       "@components/*": ["src/components/*"],
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@module/*": ["src/module/*"]
     }
   },

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './CreateUserModal.module.css';
 import { UserStatus } from '@module/employees/store/employeesSlice';
 import { useCreateUserMutation } from '@module/employees/api/usersApi';
-import { toast } from '@utils/toast';
+import { toast } from '@helpers/toast';
 import { Button } from '@components/index';
 
 interface Props {
